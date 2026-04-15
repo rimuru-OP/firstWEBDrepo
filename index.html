@@ -1,21 +1,697 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MY RESUME</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Economic Power Play</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Oswald:wght@300;400;600;700&family=Bebas+Neue&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0f;
+    font-family: 'Oswald', sans-serif;
+    overflow-x: hidden;
+  }
+
+  .poster {
+    width: 900px;
+    min-height: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(160deg, #0d0d1a 0%, #0a1628 40%, #0d0d1a 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Background texture */
+  .poster::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.01) 40px, rgba(255,255,255,0.01) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.01) 40px, rgba(255,255,255,0.01) 41px);
+    pointer-events: none;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    padding: 40px 50px 20px;
+    position: relative;
+    border-bottom: 3px solid rgba(255,200,50,0.3);
+  }
+
+  .header-tag {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: #f0c040;
+    opacity: 0.7;
+    margin-bottom: 10px;
+  }
+
+  .main-title {
+    font-family: 'Bangers', cursive;
+    font-size: 68px;
+    line-height: 1;
+    letter-spacing: 3px;
+    color: #fff;
+    text-shadow: 4px 4px 0 #c0392b, 8px 8px 0 rgba(0,0,0,0.5);
+  }
+
+  .main-title span.gold { color: #f0c040; }
+  .main-title span.red  { color: #e74c3c; }
+
+  .subtitle {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 3px;
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+
+  /* decorative line */
+  .deco-line {
+    position: absolute;
+    right: 50px; top: 40px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .deco-line span { display: block; height: 3px; background: #f0c040; border-radius: 2px; }
+  .deco-line span:nth-child(1) { width: 60px; }
+  .deco-line span:nth-child(2) { width: 40px; opacity: .6; }
+  .deco-line span:nth-child(3) { width: 20px; opacity: .3; }
+
+  /* ===== THREE COLUMN SECTIONS ===== */
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    margin-top: 0;
+  }
+
+  .col {
+    padding: 30px 24px;
+    position: relative;
+    border-right: 1px solid rgba(255,255,255,0.07);
+  }
+  .col:last-child { border-right: none; }
+
+  /* Column accent top bar */
+  .col-bar {
+    height: 4px;
+    width: 100%;
+    margin-bottom: 24px;
+    border-radius: 2px;
+  }
+  .col-usa .col-bar  { background: linear-gradient(90deg, #3b82f6, #1d4ed8); }
+  .col-russia .col-bar { background: linear-gradient(90deg, #ef4444, #7f1d1d); }
+  .col-india .col-bar  { background: linear-gradient(90deg, #f97316, #854d0e); }
+
+  /* Country flag badge */
+  .country-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 14px 4px 8px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+  .col-usa .country-badge   { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+  .col-russia .country-badge { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+  .col-india .country-badge  { background: rgba(249,115,22,0.15); color: #fdba74; border: 1px solid rgba(249,115,22,0.3); }
+
+  .flag-emoji { font-size: 18px; }
+
+  /* ===== SVG CARTOON LEADERS ===== */
+  .leader-scene {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    margin-bottom: 18px;
+  }
+
+  /* ===== ARGUMENT CARDS ===== */
+  .arg-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    margin-top: 10px;
+  }
+  .col-usa .arg-title   { color: #60a5fa; }
+  .col-russia .arg-title { color: #f87171; }
+  .col-india .arg-title  { color: #fb923c; }
+
+  .arg-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    border-left: 3px solid;
+    position: relative;
+  }
+  .col-usa .arg-card   { border-color: #3b82f6; }
+  .col-russia .arg-card { border-color: #ef4444; }
+  .col-india .arg-card  { border-color: #f97316; }
+
+  .arg-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 4px;
+    color: #fff;
+  }
+
+  .arg-text {
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: rgba(255,255,255,0.82);
+  }
+
+  .pill {
+    display: inline-block;
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    text-transform: uppercase;
+  }
+  .pill-gain  { background: rgba(34,197,94,0.2); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+  .pill-cost  { background: rgba(239,68,68,0.2); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+  .pill-mixed { background: rgba(251,191,36,0.2); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+
+  /* ===== BOTTOM COMPARISON BAND ===== */
+  .gdp-band {
+    margin: 10px 30px 40px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 14px;
+    padding: 28px 30px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .gdp-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 16px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+  }
+
+  .gdp-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+    gap: 14px;
+  }
+
+  .gdp-flag { font-size: 18px; width: 28px; text-align: center; }
+
+  .gdp-country {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 13px;
+    letter-spacing: 2px;
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  .gdp-bar-wrap {
+    flex: 1;
+    height: 10px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .gdp-bar-fill {
+    height: 100%;
+    border-radius: 5px;
+    position: relative;
+  }
+  .gdp-bar-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 60%, rgba(255,255,255,0.3));
+    border-radius: 5px;
+  }
+
+  .gdp-val {
+    font-family: 'Bangers', cursive;
+    font-size: 22px;
+    letter-spacing: 1px;
+    width: 55px;
+    text-align: right;
+  }
+
+  /* speech bubble */
+  .bubble {
+    position: absolute;
+    background: rgba(255,255,255,0.95);
+    color: #111;
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.3;
+    padding: 5px 8px;
+    border-radius: 8px;
+    max-width: 80px;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    z-index: 10;
+  }
+  .bubble::after {
+    content: '';
+    position: absolute;
+    border: 6px solid transparent;
+  }
+  .bubble-left::after  { border-top-color: rgba(255,255,255,0.95); bottom: -12px; left: 10px; }
+  .bubble-right::after { border-top-color: rgba(255,255,255,0.95); bottom: -12px; right: 10px; }
+  .bubble-center::after { border-top-color: rgba(255,255,255,0.95); bottom: -12px; left: 50%; transform: translateX(-50%); }
+
+  /* vertical divider label */
+  .vs-label {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bangers', cursive;
+    font-size: 28px;
+    color: rgba(255,255,255,0.08);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* small icon labels on scene */
+  .scene-label {
+    position: absolute;
+    bottom: 8px;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.35;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    left: 0;
+  }
+
+  /* shimmer divider */
+  .shimmer-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(240,192,64,0.4), transparent);
+    margin: 0 30px;
+  }
+
+</style>
 </head>
-<body style="background-color: black;">
-    <h1 style="color:bisque;" >MY RESUME</h1>
-    <hr style="color: aliceblue;"/>
-    <img src="./assests/images/profile.jpg">
-    <hr style="color: aliceblue;"/>
-    <p style="color:blanchedalmond;font-size: large;">My name is <span style="color: aquamarine;">Annany Thakur</span> . I'm a total beginner in Web Development. I'm currently a First year B.Tech student at NIT Hamirpur a reputed University in India.</p>
-    <p style="color: blanchedalmond;font-size: large;">I'm pursuing my BTech in Electronics And Communication Engineering. I don't have many hobbies other than playing valorant and table tennis. </p>
-    <p style="color: blanchedalmond;font-size: large;">I studied at MRA DAV Public School, Solan, HP.</p>d
-<footer>
-    <p style="color: aliceblue";>Author: Annany Thakur</p>
-    <p style="color: aliceblue"style="color: aliceblue"><a href="mailto:23bec013@nith.ac.in">23bec013@nith.ac.in</a></p>
-</footer>
+<body>
+<div class="poster">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="deco-line">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="header-tag">Global Economy · Middle East Conflict · 2023–2024</div>
+    <div class="main-title">
+      <span class="gold">OIL,</span> <span class="red">ARMS</span> &amp; <span class="gold">AMBITION</span>
+    </div>
+    <div class="subtitle">How three superpowers played the same crisis — very differently</div>
+  </div>
+
+  <!-- THREE COLUMNS -->
+  <div class="columns">
+
+    <!-- USA -->
+    <div class="col col-usa">
+      <div class="col-bar"></div>
+      <div class="country-badge"><span class="flag-emoji">🇺🇸</span> United States</div>
+
+      <!-- Leader Scene SVG -->
+      <div class="leader-scene">
+        <!-- Speech bubble -->
+        <div class="bubble bubble-left" style="top:6px;left:10px;">"Our exports are booming!"</div>
+
+        <svg viewBox="0 0 220 185" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <!-- background glow -->
+          <ellipse cx="110" cy="170" rx="90" ry="14" fill="rgba(59,130,246,0.12)"/>
+
+          <!-- OIL BARREL LEFT -->
+          <g transform="translate(10,110)">
+            <rect x="0" y="0" width="34" height="48" rx="4" fill="#1a3a5c" stroke="#4a8fc4" stroke-width="1.5"/>
+            <rect x="0" y="10" width="34" height="5" fill="#4a8fc4" opacity="0.5"/>
+            <rect x="0" y="33" width="34" height="5" fill="#4a8fc4" opacity="0.5"/>
+            <text x="17" y="26" text-anchor="middle" font-size="9" fill="#4a8fc4" font-family="Bebas Neue,sans-serif">OIL</text>
+            <text x="17" y="36" text-anchor="middle" font-size="7" fill="#60a5fa" font-family="Oswald,sans-serif">🛢️</text>
+            <!-- $ sign on barrel -->
+            <circle cx="17" cy="48" r="8" fill="#22c55e"/>
+            <text x="17" y="52" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold" font-family="Arial">$</text>
+          </g>
+
+          <!-- NUKE MISSILE (stylized, peaceful/deterrent) -->
+          <g transform="translate(170,80)">
+            <!-- missile body -->
+            <rect x="10" y="0" width="12" height="55" rx="3" fill="#374151" stroke="#6b7280" stroke-width="1"/>
+            <!-- nose cone -->
+            <polygon points="10,0 22,0 16,-18" fill="#dc2626"/>
+            <!-- fins -->
+            <polygon points="10,40 2,58 10,50" fill="#4b5563"/>
+            <polygon points="22,40 30,58 22,50" fill="#4b5563"/>
+            <!-- star on body -->
+            <text x="16" y="30" text-anchor="middle" font-size="10" fill="#fff">★</text>
+            <!-- "DETERRENT" label -->
+            <text x="16" y="75" text-anchor="middle" font-size="6" fill="#6b7280" font-family="Bebas Neue,sans-serif" letter-spacing="1">DETERRENT</text>
+          </g>
+
+          <!-- USA LEADER - Cartoon Uncle Sam style -->
+          <!-- Body -->
+          <rect x="80" y="95" width="50" height="65" rx="4" fill="#1d3a7a"/>
+          <!-- Jacket lapels -->
+          <polygon points="80,95 105,115 80,130" fill="#2a4fa0"/>
+          <polygon points="130,95 105,115 130,130" fill="#2a4fa0"/>
+          <!-- Tie -->
+          <polygon points="100,115 110,115 108,145 102,145" fill="#c0392b"/>
+          <!-- Head -->
+          <ellipse cx="105" cy="80" rx="22" ry="24" fill="#f4c88a"/>
+          <!-- Hair - white / silver -->
+          <path d="M83,72 Q85,55 105,52 Q125,55 127,72" fill="#ddd" stroke="none"/>
+          <!-- Eyes -->
+          <ellipse cx="97" cy="78" rx="3.5" ry="4" fill="#fff"/>
+          <ellipse cx="113" cy="78" rx="3.5" ry="4" fill="#fff"/>
+          <circle cx="97" cy="79" r="2" fill="#1a3a8f"/>
+          <circle cx="113" cy="79" r="2" fill="#1a3a8f"/>
+          <!-- Eyebrows -->
+          <path d="M93,73 Q97,71 101,73" stroke="#888" stroke-width="1.5" fill="none"/>
+          <path d="M109,73 Q113,71 117,73" stroke="#888" stroke-width="1.5" fill="none"/>
+          <!-- Smile -->
+          <path d="M97,88 Q105,94 113,88" stroke="#b87333" stroke-width="1.5" fill="none"/>
+          <!-- Thumbs up arm -->
+          <rect x="130" y="110" width="14" height="35" rx="6" fill="#1d3a7a"/>
+          <!-- Hand -->
+          <ellipse cx="137" cy="108" rx="9" ry="10" fill="#f4c88a"/>
+          <!-- thumb -->
+          <rect x="130" y="99" width="7" height="13" rx="4" fill="#f4c88a"/>
+          <!-- Stars on suit -->
+          <text x="86" y="140" font-size="8" fill="#ffffff" opacity="0.5">★ ★</text>
+          <!-- Legs -->
+          <rect x="87" y="158" width="16" height="22" rx="3" fill="#1a2f60"/>
+          <rect x="107" y="158" width="16" height="22" rx="3" fill="#1a2f60"/>
+          <!-- Shoes -->
+          <ellipse cx="95" cy="180" rx="10" ry="5" fill="#222"/>
+          <ellipse cx="115" cy="180" rx="10" ry="5" fill="#222"/>
+          <!-- Top Hat -->
+          <rect x="88" y="55" width="34" height="8" rx="2" fill="#1a2060"/>
+          <rect x="93" y="30" width="24" height="26" rx="3" fill="#1a2060"/>
+          <!-- Stars on hat -->
+          <text x="105" y="47" text-anchor="middle" font-size="7" fill="#f0c040">★★★</text>
+        </svg>
+        <div class="scene-label">Energy Exporter · Arms Supplier · Dollar Safe Haven</div>
+      </div>
+
+      <div class="arg-title">The Shale Swagger</div>
+
+      <div class="arg-card">
+        <div class="arg-label">Energy Play</div>
+        <div class="arg-text">Elevated oil prices supercharged shale output. Export values surged in 2024 while allies paid premium for "friendly" barrels.</div>
+        <span class="pill pill-gain">Windfall</span>
+      </div>
+
+      <div class="arg-card">
+        <div class="arg-label">Arms Economy</div>
+        <div class="arg-text">Defence contractors posted record order books. Every conflict dollar abroad recycled back into the US industrial base.</div>
+        <span class="pill pill-gain">Export Boom</span>
+      </div>
+
+      <div class="arg-card">
+        <div class="arg-label">Hidden Cost</div>
+        <div class="arg-text">Domestic inflation stayed stubborn — fuel &amp; food bills kept consumers squeezed even as Wall Street cheered a strong dollar.</div>
+        <span class="pill pill-cost">Consumer Pain</span>
+      </div>
+    </div>
+
+    <!-- RUSSIA -->
+    <div class="col col-russia">
+      <div class="col-bar"></div>
+      <div class="country-badge"><span class="flag-emoji">🇷🇺</span> Russia</div>
+
+      <!-- Leader Scene SVG -->
+      <div class="leader-scene">
+        <div class="bubble bubble-center" style="top:6px;left:50%;transform:translateX(-50%);">"We have leverage!"</div>
+
+        <svg viewBox="0 0 220 185" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <!-- glow -->
+          <ellipse cx="110" cy="170" rx="90" ry="14" fill="rgba(239,68,68,0.12)"/>
+
+          <!-- NUKE warhead (prominent) -->
+          <g transform="translate(165,60)">
+            <!-- silo base -->
+            <rect x="5" y="60" width="30" height="20" rx="2" fill="#374151"/>
+            <!-- missile -->
+            <rect x="12" y="10" width="16" height="55" rx="3" fill="#dc2626" stroke="#ef4444" stroke-width="1"/>
+            <!-- nose -->
+            <polygon points="12,10 28,10 20,-12" fill="#fee2e2"/>
+            <!-- USSR star -->
+            <text x="20" y="45" text-anchor="middle" font-size="12" fill="#fbbf24">☆</text>
+            <!-- fins -->
+            <polygon points="12,50 4,72 12,62" fill="#b91c1c"/>
+            <polygon points="28,50 36,72 28,62" fill="#b91c1c"/>
+            <!-- radiation symbol -->
+            <text x="20" y="80" text-anchor="middle" font-size="11" fill="#fbbf24">☢</text>
+          </g>
+
+          <!-- OIL BARRELS stacked -->
+          <g transform="translate(8,108)">
+            <rect x="0" y="16" width="32" height="44" rx="3" fill="#7f1d1d" stroke="#dc2626" stroke-width="1.5"/>
+            <rect x="3" y="0" width="32" height="44" rx="3" fill="#991b1b" stroke="#ef4444" stroke-width="1.5"/>
+            <rect x="3" y="6" width="32" height="5" fill="#ef4444" opacity="0.4"/>
+            <rect x="3" y="31" width="32" height="5" fill="#ef4444" opacity="0.4"/>
+            <text x="19" y="24" text-anchor="middle" font-size="8" fill="#fca5a5" font-family="Bebas Neue,sans-serif">RU OIL</text>
+            <!-- discount badge -->
+            <ellipse cx="30" cy="2" rx="9" ry="8" fill="#f59e0b"/>
+            <text x="30" y="6" text-anchor="middle" font-size="7" fill="#fff" font-weight="bold">-30%</text>
+          </g>
+
+          <!-- RUSSIA LEADER - stern, bulky -->
+          <!-- Body -->
+          <rect x="80" y="98" width="52" height="62" rx="4" fill="#374151"/>
+          <!-- Suit detail -->
+          <polygon points="80,98 106,116 80,135" fill="#4b5563"/>
+          <polygon points="132,98 106,116 132,135" fill="#4b5563"/>
+          <!-- Medal ribbons on chest -->
+          <rect x="84" y="120" width="8" height="4" fill="#dc2626"/>
+          <rect x="84" y="127" width="8" height="4" fill="#fbbf24"/>
+          <rect x="84" y="134" width="8" height="4" fill="#3b82f6"/>
+          <!-- Head - rounder, intense -->
+          <ellipse cx="106" cy="82" rx="23" ry="22" fill="#e8c99a"/>
+          <!-- Hair - very short/bald on top -->
+          <path d="M84,77 Q86,63 106,61 Q126,63 128,77" fill="#c4a97a" stroke="none"/>
+          <!-- Eyes - narrow, intense -->
+          <ellipse cx="98" cy="80" rx="3" ry="2.5" fill="#fff"/>
+          <ellipse cx="114" cy="80" rx="3" ry="2.5" fill="#fff"/>
+          <circle cx="98.5" cy="80.5" r="1.8" fill="#1f2937"/>
+          <circle cx="114.5" cy="80.5" r="1.8" fill="#1f2937"/>
+          <!-- Stern brow -->
+          <path d="M93,75 Q98,72 103,74" stroke="#7a6050" stroke-width="2" fill="none"/>
+          <path d="M109,74 Q114,72 119,75" stroke="#7a6050" stroke-width="2" fill="none"/>
+          <!-- flat mouth -->
+          <path d="M99,91 Q106,93 113,91" stroke="#b87333" stroke-width="1.5" fill="none"/>
+          <!-- Ears -->
+          <ellipse cx="83" cy="82" rx="4" ry="5" fill="#e8c99a"/>
+          <ellipse cx="129" cy="82" rx="4" ry="5" fill="#e8c99a"/>
+          <!-- pointing finger arm -->
+          <rect x="133" y="112" width="14" height="30" rx="6" fill="#374151"/>
+          <ellipse cx="143" cy="110" rx="8" ry="9" fill="#e8c99a"/>
+          <!-- index finger pointing -->
+          <rect x="140" y="98" width="6" height="16" rx="3" fill="#e8c99a"/>
+          <!-- Legs -->
+          <rect x="88" y="158" width="16" height="22" rx="3" fill="#1f2937"/>
+          <rect x="108" y="158" width="16" height="22" rx="3" fill="#1f2937"/>
+          <ellipse cx="96" cy="180" rx="10" ry="5" fill="#111"/>
+          <ellipse cx="116" cy="180" rx="10" ry="5" fill="#111"/>
+        </svg>
+        <div class="scene-label">Oil Revenue · Sanctions Pressure · Military Spending</div>
+      </div>
+
+      <div class="arg-title">The Sanction Gamble</div>
+
+      <div class="arg-card">
+        <div class="arg-label">Oil Revenues</div>
+        <div class="arg-text">High global prices propped up the treasury — but forced discounts to Asian buyers slashed real margins by nearly a third.</div>
+        <span class="pill pill-mixed">Price High, Margins Low</span>
+      </div>
+
+      <div class="arg-card">
+        <div class="arg-label">War Economy</div>
+        <div class="arg-text">Military spending consumed budget headroom. GDP looked positive on paper, but growth was entirely war-driven — not productive.</div>
+        <span class="pill pill-cost">Hollow Growth</span>
+      </div>
+
+      <div class="arg-card">
+        <div class="arg-label">Ruble &amp; Isolation</div>
+        <div class="arg-text">Cut off from Western finance, the rouble wobbled and import inflation bit hard. The nuclear arsenal became the only negotiation chip.</div>
+        <span class="pill pill-cost">Structural Fragility</span>
+      </div>
+    </div>
+
+    <!-- INDIA -->
+    <div class="col col-india">
+      <div class="col-bar"></div>
+      <div class="country-badge"><span class="flag-emoji">🇮🇳</span> India</div>
+
+      <!-- Leader Scene SVG -->
+      <div class="leader-scene">
+        <div class="bubble bubble-right" style="top:6px;right:8px;">"Buy low, sell refined!"</div>
+
+        <svg viewBox="0 0 220 185" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <!-- glow -->
+          <ellipse cx="110" cy="170" rx="90" ry="14" fill="rgba(249,115,22,0.12)"/>
+
+          <!-- BALANCE SCALE (strategic neutrality) -->
+          <g transform="translate(0,50)">
+            <!-- pole -->
+            <rect x="22" y="10" width="3" height="75" fill="#78716c"/>
+            <!-- crossbar -->
+            <rect x="5" y="30" width="37" height="3" rx="1" fill="#a16207"/>
+            <!-- left pan (RU oil) -->
+            <path d="M5,33 L5,50 Q13,56 21,50 L21,33" fill="none" stroke="#92400e" stroke-width="1.5"/>
+            <path d="M5,50 Q13,58 21,50" fill="#fbbf24" opacity="0.6"/>
+            <text x="13" y="46" text-anchor="middle" font-size="8" fill="#fff" font-family="Bebas Neue,sans-serif">RU</text>
+            <!-- right pan (USD trade) -->
+            <path d="M21,33 L21,45 Q29,51 37,45 L37,33" fill="none" stroke="#92400e" stroke-width="1.5"/>
+            <path d="M21,45 Q29,53 37,45" fill="#22c55e" opacity="0.6"/>
+            <text x="29" y="42" text-anchor="middle" font-size="8" fill="#fff" font-family="Bebas Neue,sans-serif">$</text>
+          </g>
+
+          <!-- OIL BARREL discounted -->
+          <g transform="translate(165,108)">
+            <rect x="0" y="0" width="34" height="52" rx="4" fill="#78350f" stroke="#f97316" stroke-width="1.5"/>
+            <rect x="0" y="10" width="34" height="5" fill="#f97316" opacity="0.5"/>
+            <rect x="0" y="35" width="34" height="5" fill="#f97316" opacity="0.5"/>
+            <text x="17" y="28" text-anchor="middle" font-size="8" fill="#fdba74" font-family="Bebas Neue,sans-serif">CHEAP OIL</text>
+            <!-- refinery arrow -->
+            <text x="17" y="52" text-anchor="middle" font-size="10">⬇</text>
+            <!-- refined export label -->
+            <rect x="-10" y="60" width="54" height="16" rx="4" fill="#065f46"/>
+            <text x="17" y="72" text-anchor="middle" font-size="8" fill="#6ee7b7" font-family="Bebas Neue,sans-serif">REFINED EXPORT</text>
+          </g>
+
+          <!-- INDIA LEADER - traditional, confident -->
+          <!-- Body - kurta style -->
+          <rect x="79" y="98" width="50" height="62" rx="6" fill="#4c1d95"/>
+          <!-- collar / kurta detail -->
+          <rect x="97" y="98" width="14" height="25" rx="3" fill="#5b21b6"/>
+          <!-- button detail -->
+          <circle cx="104" cy="106" r="2" fill="#7c3aed"/>
+          <circle cx="104" cy="114" r="2" fill="#7c3aed"/>
+          <circle cx="104" cy="122" r="2" fill="#7c3aed"/>
+          <!-- Head -->
+          <ellipse cx="104" cy="80" rx="21" ry="23" fill="#c4855a"/>
+          <!-- hair dark -->
+          <path d="M83,73 Q85,58 104,56 Q123,58 125,73" fill="#1f1008" stroke="none"/>
+          <!-- Eyes - warm, welcoming -->
+          <ellipse cx="96" cy="79" rx="3.5" ry="4" fill="#fff"/>
+          <ellipse cx="112" cy="79" rx="3.5" ry="4" fill="#fff"/>
+          <circle cx="96" cy="80" r="2.2" fill="#1f1008"/>
+          <circle cx="112" cy="80" r="2.2" fill="#1f1008"/>
+          <!-- eyebrows dark -->
+          <path d="M91,73 Q96,70 101,73" stroke="#3d1a00" stroke-width="1.8" fill="none"/>
+          <path d="M107,73 Q112,70 117,73" stroke="#3d1a00" stroke-width="1.8" fill="none"/>
+          <!-- warm smile -->
+          <path d="M95,90 Q104,98 113,90" stroke="#8b5344" stroke-width="1.8" fill="none"/>
+          <!-- Ears -->
+          <ellipse cx="83" cy="80" rx="4" ry="5" fill="#c4855a"/>
+          <ellipse cx="125" cy="80" rx="4" ry="5" fill="#c4855a"/>
+          <!-- Nehru cap -->
+          <rect x="86" y="55" width="36" height="8" rx="4" fill="#fffbeb"/>
+          <rect x="90" y="46" width="28" height="12" rx="4" fill="#fffbeb"/>
+          <!-- badge on cap -->
+          <circle cx="104" cy="52" r="5" fill="#16a34a"/>
+          <circle cx="104" cy="52" r="3" fill="#fffbeb"/>
+          <!-- waving arm -->
+          <rect x="52" y="112" width="14" height="30" rx="6" fill="#4c1d95"/>
+          <ellipse cx="59" cy="110" rx="9" ry="10" fill="#c4855a"/>
+          <!-- wave fingers -->
+          <rect x="53" y="98" width="5" height="14" rx="3" fill="#c4855a"/>
+          <rect x="60" y="96" width="5" height="16" rx="3" fill="#c4855a"/>
+          <!-- Legs -->
+          <rect x="87" y="158" width="16" height="22" rx="3" fill="#3b0764"/>
+          <rect x="107" y="158" width="16" height="22" rx="3" fill="#3b0764"/>
+          <ellipse cx="95" cy="180" rx="10" ry="5" fill="#1a0030"/>
+          <ellipse cx="115" cy="180" rx="10" ry="5" fill="#1a0030"/>
+        </svg>
+        <div class="scene-label">Strategic Buyer · Refinery Hub · Fastest GDP Growth</div>
+      </div>
+
+      <div class="arg-title">The Quiet Winner</div>
+
+      <div class="arg-card">
+        <div class="arg-label">Energy Arbitrage</div>
+        <div class="arg-text">India snapped up deeply discounted Russian crude, slashed import bills, and refined it for re-export at world prices — a textbook margin play.</div>
+        <span class="pill pill-gain">Strategic Gain</span>
+      </div>
+
+      <div class="arg-card">
+        <div class="arg-label">Non-Alignment Dividend</div>
+        <div class="arg-text">Staying neutral meant India kept trade links with both sanctioning powers and Russia, becoming an indispensable economic bridge.</div>
+        <span class="pill pill-gain">+7.1% GDP</span>
+      </div>
+
+      <div class="arg-card">
+        <div class="arg-label">Domestic Resilience</div>
+        <div class="arg-text">Consumer demand surged, logistics held firm, and the rupee stayed stable — making India the world's fastest-growing major economy through the crisis.</div>
+        <span class="pill pill-gain">Strong Growth</span>
+      </div>
+    </div>
+
+  </div><!-- /columns -->
+
+  <div class="shimmer-divider"></div>
+
+  <!-- GDP COMPARISON BAND -->
+  <div class="gdp-band">
+    <div class="gdp-title">GDP Growth Snapshot — 2024</div>
+
+    <div class="gdp-row">
+      <div class="gdp-flag">🇺🇸</div>
+      <div class="gdp-country" style="color:#60a5fa">USA</div>
+      <div class="gdp-bar-wrap">
+        <div class="gdp-bar-fill" style="width:40%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div>
+      </div>
+      <div class="gdp-val" style="color:#60a5fa">+2.8%</div>
+    </div>
+
+    <div class="gdp-row">
+      <div class="gdp-flag">🇷🇺</div>
+      <div class="gdp-country" style="color:#f87171">RUSSIA</div>
+      <div class="gdp-bar-wrap">
+        <div class="gdp-bar-fill" style="width:51%;background:linear-gradient(90deg,#ef4444,#f87171)"></div>
+      </div>
+      <div class="gdp-val" style="color:#f87171">+3.6%*</div>
+    </div>
+
+    <div class="gdp-row">
+      <div class="gdp-flag">🇮🇳</div>
+      <div class="gdp-country" style="color:#fb923c">INDIA</div>
+      <div class="gdp-bar-wrap">
+        <div class="gdp-bar-fill" style="width:100%;background:linear-gradient(90deg,#f97316,#fbbf24)"></div>
+      </div>
+      <div class="gdp-val" style="color:#fbbf24">+7.1%</div>
+    </div>
+
+    <div style="margin-top:12px;font-size:9px;color:rgba(255,255,255,0.28);letter-spacing:1.5px;font-family:'Oswald',sans-serif;">
+      * Russia's growth is war-spending driven and may not reflect productive output · Figures are approximate
+    </div>
+  </div>
+
+</div><!-- /poster -->
 </body>
-</html> 
+</html>
